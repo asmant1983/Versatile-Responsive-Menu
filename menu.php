@@ -2,7 +2,7 @@
 
 /* Wordpress template integration */
 
-/* Wordpress template integration */
+
 
 echo '
 
