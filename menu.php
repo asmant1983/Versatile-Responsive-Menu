@@ -63,7 +63,6 @@
 
         /*
 
-        echo '<ul id="respMenu" class="Versatile_Resp_Menu" data-menu-style="';
         $menu_options = get_field('menu_options', 'option');
         $menu_type = [        
         'horizontal',
@@ -73,9 +72,8 @@
         ];
 
         $menu_style = in_array($menu_options, $menu_type) ? $menu_options : 'horizontal';
-
-        echo esc_attr($menu_style);
-                echo '">';
+        echo '<ul id="respMenu" class="Versatile_Resp_Menu" data-menu-style="' . esc_attr($menu_style) . '">';
+        
         */
         ?>
         <?php
