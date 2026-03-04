@@ -1,8 +1,7 @@
 <h1>Versatile Responsive Menu</h1>
 
 <h2>Introduction</h2>
-
-Welcome to the Versatile Responsive Menu! This is a highly flexible, robust, and developer-friendly 
+This is a highly flexible, robust, and developer-friendly 
 navigation solution designed for modern web environments. Whether you are building a lightning-fast 
 static HTML website or developing a custom, dynamic WordPress theme, this menu provides the perfect 
 structural foundation for a seamless user experience across all devices.
