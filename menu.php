@@ -16,47 +16,78 @@
         </section>
     </div>
 
-    <?php if ( has_nav_menu( 'my-custom-menu' ) ) : ?>
+    <?php if ( has_nav_menu( 'my-custom-menu' ) ) :
         
-        <?php
         /*
-        -- Optional ACF Integration -- 
-        Use the Advanced Custom Fields (Pro) or Secure Custom Fields plugin
-        to allow admins to dynamically choose a menu type in the backend.
-        Create a 'Select' field named 'menu_options' with the following choices:
-            horizontal : Horizontal dropdown
-            vertical   : Vertical flyout
-            accordion  : Accordion menu
-            megamenu   : Megamenu
+        Enter the menu type between the quotation marks for the data-menu-style attribute:
+        'horizontal' = Horizontal dropdown (Most commonly used)
+        'vertical'   = Vertical flyout menu
+        'accordion'  = Accordion menu
+        'megamenu'   = Megamenu (Common for e-commerce and large-scale websites)
         */
 
-        // Default fallback style
-        $menu_style = 'horizontal'; 
-
-        // Prevent 'Fatal Error' by checking if the ACF plugin is active
-        if ( function_exists('get_field') ) {
-            // Fetch field (Note: 'option' requires ACF Pro)
-            $menu_options = get_field('menu_options', 'option');
-            $menu_types = ['horizontal', 'vertical', 'accordion', 'megamenu'];
-            
-            // Strict validation against allowed styles
-            if ( in_array($menu_options, $menu_types, true) ) {
-                $menu_style = $menu_options;
-            }
-        }
         ?>
 
-        <!-- Output the menu with the safe, escaped data attribute -->
-        <ul id="respMenu" class="Versatile_Resp_Menu" data-menu-style="<?php echo esc_attr($menu_style); ?>">
-            <?php
-            wp_nav_menu( array(
-                'theme_location' => 'my-custom-menu',
-                'depth'          => 3, /* One main level and two sublevels max. */
-                'container'      => false,
-                'items_wrap'     => '%3$s',
-            ) );
-            ?>
-        </ul>
+        <ul id="respMenu" class="Versatile_Resp_Menu" data-menu-style="horizontal">';        
+                
+        <?php
+        /*
+        
+        -- Optional -- 
 
-    <?php endif; ?>
-</nav>
+        Use the Advanced Custom Fields (Pro) or Secure Custom Fields plugin
+        to use the script below. This script allows admins to choose a menu 
+        type in the backend and automatically appends the correct attributes 
+        to the <ul id="respMenu"> tag. This pairs perfectly with the Canvas 
+        JavaScript, which reacts to the dynamically placed data-menu-style 
+        attribute! To create the menu choice:
+
+        - Click on 'Add Field'
+        - Under 'Field Type' choose 'Select' 
+        - Under 'Field Name' enter field name of your choice (like 'menu_options')
+        - Under choices enter the following label and value:
+        
+                horizontal - Horizontal dropdown (Most commonly used)
+                vertical   - Vertical flyout menu
+                accordion  - Accordion menu
+                megamenu   - Megamenu (Common for e-commerce and large-scale websites)
+        
+        - Return Format on 'Value'
+
+        Don't forget to comment or remove 
+        '<ul id="respMenu" class="Versatile_Resp_Menu" data-menu-style="<menu type>">'
+        on 31.
+        To visualize, see the included screenshots ACF_01.png and ACF_02.png
+
+        */
+
+        /*
+
+        echo '<ul id="respMenu" class="Versatile_Resp_Menu" data-menu-style="';
+        $menu_options = get_field('menu_options', 'option');
+        $menu_type = [        
+        'horizontal',
+        'vertical',
+        'accordion',
+        'megamenu',
+        ];
+
+        $menu_style = in_array($menu_options, $menu_type) ? $menu_options : 'horizontal';
+
+        echo esc_attr($menu_style);
+                echo '">';
+        */
+        ?>
+        <?php
+        wp_nav_menu(
+                array(
+                'theme_location' => 'my-custom-menu',
+                'depth' => 3,      /* One main level and two sublevels. Important note: More than three levels are unrecommended. */
+                'container' => false,
+                'items_wrap' => '%3$s',
+                ),
+        );
+        ?>
+        </ul>
+        <?php endif; ?>
+</nav>';
